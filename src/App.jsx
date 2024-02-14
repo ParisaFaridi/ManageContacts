@@ -1,6 +1,6 @@
-import AddContactForm from "./AddContactForm";
-import ContactList from "./ContactList";
-import "./App.css";
+import AddContactForm from "./components/AddContactForm";
+import ContactList from "./components/ContactList";
+import Header from "./components/Header"
 import { useState } from "react";
 
 function App() {
@@ -10,17 +10,16 @@ function App() {
     setContacts((contacts) => [...contacts, contact]);
   };
 
-  const deleteHandler=()=>{
-    
+  const deleteHandler=(id)=>{
+    const newContacts = contacts.filter((contact) => contact.id!==id)
+    setContacts(newContacts)
   }
-  return (
-    <div className="container-fluid">
-      <h2>Contact App</h2>
-      <span>Parisa</span>
-      <span> | React.js</span>
 
+  return (
+    <div >
+      <Header/>
       <AddContactForm onContactAdded={handleAddContact} />
-      <ContactList contacts={contacts} onDelete={deleteHandler}/>
+      <ContactList contacts={contacts} deleteHandler={deleteHandler}/>
     </div>
   );
 }

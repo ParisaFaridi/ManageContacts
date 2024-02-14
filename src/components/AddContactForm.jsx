@@ -5,7 +5,7 @@ function AddContactForm(props) {
   const [error, setError] = useState(false)
 
   const [contact, setContact] = useState({
-    
+    id:"",
     name: "",
     lastName: "",
     email: "",
@@ -23,14 +23,14 @@ function AddContactForm(props) {
   };
 
   const addContact=()=>{
-    props.onContactAdded(contact)
+    const contactWithId={...contact,id:v4()}
+    props.onContactAdded(contactWithId)
   }
 
   const contactHandler=(event)=>{
     const value=event.target.value
     const name=event.target.name
     setContact(() => ({...contact,[name]: value}))
-    console.log(contact)
   }
 
   return (
@@ -44,7 +44,7 @@ function AddContactForm(props) {
           <input className="col form-control mx-3" placeholder="Email" value={contact.email} onChange={contactHandler} name="email"/>
           <input className="col form-control mx-3" placeholder="Phone" value={contact.phone} onChange={contactHandler} name="phone"/>
         </div>
-        <div class="d-grid gap-2">
+        <div className="d-grid gap-2">
           <button
             className="btn btn-primary my-3"
             type="submit"
@@ -58,5 +58,6 @@ function AddContactForm(props) {
     </form>
   );
 }
+import { v4 } from "uuid";
 
 export default AddContactForm;

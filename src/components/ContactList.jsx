@@ -4,10 +4,6 @@ import Contact from "./Contact";
 
 function ContactList(props) {
   
-  const onDeleteHandler=()=>{
-props.onDelete()
-  }
-
   return (
     <>
       {props.contacts.length < 1 ? (
@@ -16,8 +12,12 @@ props.onDelete()
         </div>
       ) : (
         <div className="container-fluid card p-5 my-3">
-          {props.contacts.map((contact, index) => (
-            <Contact value={contact} key={index} onDelete={onDeleteHandler}/>
+          {props.contacts.map((contact) => (
+            <Contact
+              value={contact}
+              key={contact.id}
+              deleteHandler={props.deleteHandler}
+            />
           ))}
         </div>
       )}
